@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {h, render} from 'preact';
 import App from './App';
 import './index.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+const rootNode = document.getElementById('root');
+
+if (!rootNode) {
+  console.error('Critical error: Could not find element with ID "root"');
+}
+else {
+  render(<App />, rootNode);
+}
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://www.snowpack.dev/#hot-module-replacement

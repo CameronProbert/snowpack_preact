@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {FunctionalComponent, h} from 'preact';
+import {useState, useEffect} from 'preact/hooks'
+import './App.scss';
+import Card from './Card';
 
-interface AppProps {}
+type AppProps = {}
 
-function App({}: AppProps) {
+const App: FunctionalComponent<AppProps> = ({}) => {
+  const [nextCardNum, setNextCardNum] = useState<number>(1);
+  const [cards, setCards] = useState<number[]>([])
+
+  function handleNewCard() {
+    setCards(cards => [...cards, nextCardNum]);
+    setNextCardNum(nextCardNum + 1);
+  }
+
+  function filterCard(numToRemove: number) {
+    setCards(cards => cards.filter(card => card !== numToRemove));
+  }
+
+  useEffect(() => {
+    handleNewCard()
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {cards.map(cardNum =>
+        <Card
+          key={cardNum}
+          title={`Test ${cardNum}`}
+          detail="A Test Card"
+          onClick={() => filterCard(cardNum)}/>)
+      }
+      <div className="card__base" style={{fontSize: '0.8em'}}>
+        <Card title="Add Card" detail="" onClick={handleNewCard} />
+      </div>
     </div>
   );
 }

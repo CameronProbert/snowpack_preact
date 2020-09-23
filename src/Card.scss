@@ -1,0 +1,40 @@
+$minCardWidth: 300px;
+$minCardHeight: 500px;
+
+.card__base {
+    flex: none;
+    background-color: grey;
+    border-radius: 4px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: darkgrey;
+    padding: 10px;
+    margin: 2px;
+    width: $minCardWidth;
+    height: $minCardHeight;
+}
+
+.card__base:hover {
+    background-color: lighten(grey, 5%);
+    border-color: lighten(darkgrey, 5%);
+    border-width: 3px;
+    margin: 0px;
+    width: clamp($minCardWidth, $minCardWidth + 3);
+    min-width: $minCardWidth;
+    min-height: $minCardHeight;
+}
+
+.card__circle_base {
+    width: 90%;
+}
+
+.card__circle {
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: darkgrey;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 100%;
+}
